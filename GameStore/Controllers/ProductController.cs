@@ -26,8 +26,7 @@ namespace GameStore.Controllers
         public async Task<IActionResult> GetAll()
         {
             var result = await _productService.GetAll();
-            var response = _mapper.Map<IEnumerable<ProductDto>>(result);
-            return Ok(response);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]

@@ -27,8 +27,8 @@ namespace GameStoreTest.Controllers
                     Id = 1,
                     Price= 1,
                     AgeRestriction= 1,
-                    Company="",
-                    Description="",
+                    Company="Test Company",
+                    Description="Test Description",
                     Name="Test Product 1"
                 },
                 new Product
@@ -48,11 +48,11 @@ namespace GameStoreTest.Controllers
         {
             _mockProductService.Setup(x => x.GetAll()).Returns(Task.FromResult(_mockProducts));
 
-            var result = await _controller.GetAll();
-            //var a = result.Result;
+            var result = await _controller.GetAll() as OkObjectResult;
 
             Assert.NotNull(result);
-            //result.Result.StatusCode.Value.;
+            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<List<Product>>(result?.Value);
         }
     }
 }
